@@ -8,6 +8,13 @@ class CardEditor extends React.Component {
         this.state = { front: '', back: ''};
     }
     
+    addCard = () => {
+        this.props.addCard(this.state);
+        this.setState({ front: '', back: ''});
+    };
+
+    deleteCard = index => this.props.deleteCard(index);
+
     handleChange = event => this.setState({ [event.target.name] : event.target.value});
 
     render() {
@@ -18,7 +25,7 @@ class CardEditor extends React.Component {
                     <td>{card.front}</td>
                     <td>{card.back}</td>
                     <td>
-                        <button>Delete Card</button>
+                        <button onClick={ () => this.deleteCard(index)} >Delete Card</button>
                     </td>
                 </tr>
             );
@@ -42,7 +49,9 @@ class CardEditor extends React.Component {
                 <br/>
                 <input name='front' onChange={this.handleChange} placeholder='Front of card' value={this.state.front}/>
                 <input name='back' onChange={this.handleChange} placeholder='Back of card' value={this.state.back}/>
-                <button>Add Card</button>
+                <button onClick={this.addCard} >Add Card</button>
+                <br/>
+                <button onClick={this.props.switchMode}>Go to Card Viewer</button>
             </div>
         );
     }
