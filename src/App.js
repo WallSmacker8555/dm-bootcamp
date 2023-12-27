@@ -23,6 +23,7 @@ class App extends React.Component {
   deleteCard = index => {
     const cards = this.state.cards.slice();
     cards.splice(index, 1);
+    this.setState({ cards })
   }
 
   switchMode = () => this.setState({ editor: !this.state.editor });
